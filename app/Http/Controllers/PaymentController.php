@@ -12,7 +12,7 @@ class PaymentController extends Controller
 		$payload = $request->getContent();
 		$notification = json_decode($payload);
 
-		$validSignatureKey = hash("sha512", $notification->order_id . $notification->status_code . $notification->gross_amount . 'SB-Mid-server-qfmZPQ6-2OoutunOib_XJpl3');
+		$validSignatureKey = hash("sha512", $notification->order_id . $notification->status_code . $notification->gross_amount . 'SB-Mid-server-mKNXN54jqD77z5ae2tp7lTXi');
 		if ($notification->signature_key != $validSignatureKey) {
 			return response(['message' => 'Invalid signature'], 403);
 		}
@@ -56,6 +56,8 @@ class PaymentController extends Controller
 		} else if ($transaction == 'settlement') {
 			// TODO set payment status in merchant's database to 'Settlement'
 			$paymentStatus = Payment::SETTLEMENT;
+			$order->payment_status = 'paid';
+			$order->save();
 		} else if ($transaction == 'pending') {
 			// TODO set payment status in merchant's database to 'Pending'
 			$paymentStatus = Payment::PENDING;
