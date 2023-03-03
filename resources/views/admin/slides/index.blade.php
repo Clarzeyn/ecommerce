@@ -40,7 +40,7 @@
                                 </a>
                             </td>
                             <td>
-                                <img width="60" src="{{ Storage::url('images/slides/'. $slide->cover) }}" alt="">
+                                <img width="60" src="{{ Storage::url('public/images/slides/'. $slide->cover) }}" alt="">
                             </td>
                             <td>{{ $slide->position }}</td>
                             <td>

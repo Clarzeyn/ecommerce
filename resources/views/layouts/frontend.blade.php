@@ -24,7 +24,7 @@
         <link rel="stylesheet" href="{{ asset('frontend/assets/css/responsive.css') }}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <script src="{{ asset('frontend/assets/js/vendor/modernizr-2.8.3.min.js') }}"></script>
-        
+        {{-- <link rel="stylesheet" href="{{asset('css/style.css')}}"> --}}
         <link rel="stylesheet" href="{{ asset('frontend/assets/css/custom.css') }}">
 
         <!-- CSRF Token -->
@@ -40,7 +40,7 @@
                         <div class="header-bottom-wrapper">
                             <div class="logo-2 furniture-logo ptb-30">
                                 <a href="/">
-                                    <img height="60" style="transform:scale(1.5);object-fit: cover;" src="{{ asset('frontend/assets/img/logo/logo.png') }}" alt="">
+                                    <img height="60" style="transform:scale(1.5);object-fit: cover;" src="{{ asset('frontend/assets/img/logo/logoasal.png') }}" alt="">
                                 </a>
                             </div>
                             <div class="menu-style-2 furniture-menu menu-hover">
@@ -186,15 +186,14 @@
 
         @yield('content')
 
-        <!-- footer -->
-        <footer class="footer-area">
+            <footer class="footer-area">
             <div class="footer-top-area pt-70 pb-35 wrapper-padding-5">
                 <div class="container-fluid">
                     <div class="widget-wrapper">
                         <div class="footer-widget mb-30">
-                        <img height="60" style="transform:scale(1.5);object-fit: cover;" src="{{ asset('frontend/assets/img/logo/logo.png') }}" alt="">
+                        <img height="60" style="transform:scale(1.5);object-fit: cover;" src="{{ asset('frontend/assets/img/logo/logoasal.png') }}" alt="">
                             <div class="footer-about-2">
-                                <p>There are many variations of passages of Lorem Ipsum <br>the majority have suffered alteration in some form, by <br> injected humour</p>
+                                <p>Don't wait for someone to bring you flowers.  <br>Plant your own garden and decorate your own soul.</p>
                             </div>
                         </div>
                         <div class="footer-widget mb-30">
@@ -205,7 +204,7 @@
                                         <span>Address: </span>
                                     </div>
                                     <div class="footer-info-content3">
-                                        <p>66 Sipu road Rampura Banasree <br>USA- 10800</p>
+                                        <p>Leuwidulang, Bandung <br>Indonesia- 10800</p>
                                     </div>
                                 </div>
                                 <div class="footer-address-furniture">
@@ -213,7 +212,7 @@
                                         <span>Phone: </span>
                                     </div>
                                     <div class="footer-info-content3">
-                                        <p>+8801 (33) 515609735 <br>+8801 (66) 223352333</p>
+                                        <p>+62812-9269-0211<br>+6288-498-5408</p>
                                     </div>
                                 </div>
                                 <div class="footer-address-furniture">
@@ -221,7 +220,7 @@
                                         <span>E-mail: </span>
                                     </div>
                                     <div class="footer-info-content3">
-                                        <p><a href="#"> email@domain.com</a> <br><a href="#"> domain@mail.info</a></p>
+                                        <p><a href="#"> Clarzeyn@gmail.com</a> <br><a href="#"> wildan.mnf05@gmail.com</a></p>
                                     </div>
                                 </div>
                             </div>
@@ -250,14 +249,13 @@
                     <div class="row">
                         <div class="col-12 text-center">
                             <div class="copyright-furniture">
-                                <p>Copyright © <a href="https://hastech.company/">HasTech</a> 2018 . All Right Reserved.</p>
+                                <p>Copyright © <a href="https://hastech.company/">Wildanmnf</a> 2023 . All Right Reserved.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </footer>
-
 
      
        
@@ -289,7 +287,6 @@
                         wildcard: '%QUERY%'
                     },
                 });
-
                 $('#search').typeahead({
                     hint: true,
                     highlight: true,
@@ -315,5 +312,18 @@
                 });
             });
         </script>
+        <!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/63f416824247f20fefe1b177/1gponfsvs';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
     </body>
 </html>

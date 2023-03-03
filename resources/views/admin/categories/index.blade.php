@@ -36,7 +36,7 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>
                                 @if($category->cover)
-                                    <img src="{{ Storage::url('images/categories/' . $category->cover) }}"
+                                    <img src="{{ Storage::url('public/images/categories/' . $category->cover) }}"
                                         width="60" height="60" alt="{{ $category->name }}">
                                 @else
                                     <span class="badge badge-primary">No image</span>

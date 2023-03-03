@@ -29,6 +29,7 @@
                 <div class="sidebar-categories">
                     <ul>
                         @foreach($tags_menu as $tag_menu)
+                        @if($tag_menu->products_count  > 0)
                             <span style="background: #ebebeb none repeat scroll 0 0; color: #333;
                             display: inline-block; font-size: 12px; line-height: 20px; margin:
                             5px 5px 0 0; padding: 5px 15px; text-transform: capitalize;">
@@ -37,6 +38,9 @@
                                     ({{ $tag_menu->products_count }})
                                 </a>
                             </span>
+                        @elseif($tag_menu->products_count <= 0)
+                        
+                        @endif
                         @endforeach
                     </ul>
                 </div>

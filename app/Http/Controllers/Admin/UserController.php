@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Role;
-use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreUserRequest;
 use App\Http\Requests\Admin\UpdateUserRequest;
+use App\Models\Role;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -45,7 +45,7 @@ class UserController extends Controller
         $user = User::create($request->validated() + ['password' => bcrypt($request->password)]);
         $user->roles()->sync($request->input('roles'));
 
-        return redirect()->route('admin.users.index')->with('message', "Successfully Created !");   
+        return redirect()->route('admin.users.index')->with('message', "Successfully Created !");
     }
 
     /**
@@ -58,7 +58,7 @@ class UserController extends Controller
     {
         $roles = Role::pluck('title', 'id');
 
-        return view('admin.users.edit', compact('user','roles'));
+        return view('admin.users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -68,12 +68,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUserRequest $request,User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
         $user->update($request->validated() + ['password' => bcrypt($request->password)]);
         $user->roles()->sync($request->input('roles'));
 
-        return redirect()->route('admin.users.index')->with('message',  "Successfully updated !");
+        return redirect()->route('admin.users.index')->with('message', "Successfully updated !");
     }
 
     /**
@@ -86,6 +86,6 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return redirect()->route('admin.users.index')->with('message',  "Successfully deleted !");
+        return redirect()->route('admin.users.index')->with('message', "Successfully deleted !");
     }
 }

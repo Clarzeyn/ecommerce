@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\API\CategoriesController;
+use App\Http\Controllers\API\TagController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,12 +13,10 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/
-
+ */
 
 Route::post('register', [\App\Http\Controllers\API\UserController::class, 'register']);
 Route::post('login', [\App\Http\Controllers\API\UserController::class, 'login']);
-
 
 Route::middleware('auth:api', 'sessions')->group(function () {
     Route::get('profile', [\App\Http\Controllers\API\UserController::class, 'getProfile']);
@@ -40,6 +39,5 @@ Route::middleware('client')->group(function () {
     Route::get('product/{slug}', [\App\Http\Controllers\API\ProductController::class, 'show']);
 });
 
-
-
-
+Route::resource('categories', CategoriesController::class);
+Route::resource('tags', TagController::class);

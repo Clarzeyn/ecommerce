@@ -42,16 +42,21 @@ class SlideController extends Controller
      */
     public function store(SlideRequest $request)
     {
-        $image = null;
+        $input = $request->all();
         if ($request->hasFile('cover')) {
-            $image = $this->uploadImage($request->title, $request->cover, 'slides', 500, 500);
+            $destination_path = 'public/images/slides';
+            $image = $request->file('cover');
+            $image_name = $image->getClientOriginalName();
+            $path = $request->file('cover')->storeAs($destination_path, $image_name);
+
+            $input = $image_name;
         }
 
         Slide::create([
             'title' => $request->title,
             'url' => $request->url,
             'body' => $request->body,
-            'cover' => $image,
+            'cover' => $input,
             'position' => Slide::max('position') + 1,
         ]);
 

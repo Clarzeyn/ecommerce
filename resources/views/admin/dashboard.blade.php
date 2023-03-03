@@ -88,7 +88,58 @@
         </div>
     </div>
 
+    <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">Grafik Order Bulanan</div>
+                        <div class="card-body">
+                            <div id="grafik"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     <!-- Content Row -->
 
 </div>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/63f416824247f20fefe1b177/1gponfsvs';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+<script src="https://code.highcharts.com/highcharts.js"></script>
+    <script type="text/javascript">
+    var total = <?php echo json_encode($total)?>;
+    Highcharts.chart('grafik',{
+        title: {
+            text : "A Chart For Order"
+        },
+        xAxis:{
+            categories: [
+                'January', 'Febuary', 'March', 'April', 'May', 'June', 
+                'July', 'August', 'September', 'October', 'November', 
+                'December'
+            ]
+        },
+        yAxis:{
+            title:{
+                text: "Number Of Order"
+            }
+        },
+        series:[{
+            name:"New Order",
+            data:total
+        }],
+
+    });
+    </script>
 @endsection

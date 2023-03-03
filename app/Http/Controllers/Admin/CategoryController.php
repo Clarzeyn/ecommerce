@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\CategoryRequest;
 use App\Models\Category;
 use App\Traits\ImageUploadTrait;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
-use App\Http\Requests\Admin\CategoryRequest;
 use Symfony\Component\HttpFoundation\Response;
 
 class CategoryController extends Controller
@@ -19,10 +19,10 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
+    {
         abort_if(Gate::denies('category_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $categories = Category::with('parent')->withCount('products')->latest()->paginate(5); 
+        $categories = Category::with('parent')->withCount('products')->latest()->paginate(5);
 
         return view('admin.categories.index', compact('categories'));
     }
@@ -51,20 +51,25 @@ class CategoryController extends Controller
     {
         abort_if(Gate::denies('category_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $image = NULL;
+        $input = $request->all();
         if ($request->hasFile('cover')) {
-            $image = $this->uploadImage($request->name, $request->cover, 'categories', 268, 268);
+            $destination_path = 'public/images/categories';
+            $image = $request->file('cover');
+            $image_name = $image->getClientOriginalName();
+            $path = $request->file('cover')->storeAs($destination_path, $image_name);
+
+            $input = $image_name;
         }
 
         Category::create([
             'name' => $request->name,
             'category_id' => $request->category_id,
-            'cover' => $image,
+            'cover' => $input,
         ]);
 
         return redirect()->route('admin.categories.index')->with([
             'message' => 'success created !',
-            'alert-type' => 'success'
+            'alert-type' => 'success',
         ]);
     }
 
@@ -103,14 +108,14 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryRequest $request,Category $category)
+    public function update(CategoryRequest $request, Category $category)
     {
         abort_if(Gate::denies('category_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $image = $category->cover;
         if ($request->has('cover')) {
-            if ($category->cover != null && File::exists('storage/images/categories/'. $category->cover)) {
-                unlink('storage/images/categories/'. $category->cover);
+            if ($category->cover != null && File::exists('storage/images/categories/' . $category->cover)) {
+                unlink('storage/images/categories/' . $category->cover);
             }
             $image = $this->uploadImage($request->name, $request->cover, 'categories', 268, 268);
         }
@@ -123,8 +128,8 @@ class CategoryController extends Controller
 
         return redirect()->route('admin.categories.index')->with([
             'message' => 'success updated !',
-            'alert-type' => 'info'
-        ]);    
+            'alert-type' => 'info',
+        ]);
     }
 
     /**
@@ -137,17 +142,17 @@ class CategoryController extends Controller
     {
         abort_if(Gate::denies('category_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        if($category->category_id == null) {
-            foreach($category->children as $child) {
-                if (File::exists('storage/images/categories/'. $child->cover)) {
-                    unlink('storage/images/categories/'. $child->cover);
+        if ($category->category_id == null) {
+            foreach ($category->children as $child) {
+                if (File::exists('storage/images/categories/' . $child->cover)) {
+                    unlink('storage/images/categories/' . $child->cover);
                 }
             }
         }
 
         if ($category->cover) {
-            if (File::exists('storage/images/categories/'. $category->cover)) {
-                unlink('storage/images/categories/'. $category->cover);
+            if (File::exists('storage/images/categories/' . $category->cover)) {
+                unlink('storage/images/categories/' . $category->cover);
             }
         }
 
@@ -156,6 +161,6 @@ class CategoryController extends Controller
         return redirect()->route('admin.categories.index')->with([
             'message' => 'success deleted !',
             'alert-type' => 'danger',
-            ]);
+        ]);
     }
 }

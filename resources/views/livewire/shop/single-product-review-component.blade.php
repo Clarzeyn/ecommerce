@@ -113,7 +113,7 @@
         @endif
     </div>
     @else
-        <a href="{{ route('login') }}" class="btn btn-dark">
+        <a href="{{ route('login') }}" class="btn btn-dark" style=" height: 50px">
             Login to write a review!
         </a>
     @endauth

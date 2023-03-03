@@ -37,7 +37,7 @@
                         <div class="col-4">
                             <div class="form-group">
                                 <label for="quantity">Quantity</label>
-                                <input class="form-control" id="quantity" type="number" name="quantity" value="{{ old('quantity') }}">
+                                <input class="form-control" id="quantity" type="number" name="quantity" min="0" pattern="[0-9]" value="{{ old('quantity') }}">
                                 @error('quantity')<span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                         </div>
@@ -81,9 +81,8 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="status">Status</label>
-                                <select name="status" id="status" class="form-control">
-                                    <option value="">- Select Status-</option>
+                                <label for="status" hidden>Status</label>
+                                <select name="status" id="status" class="form-control" hidden>
                                     <option value="1" {{ old('status') == "1" ? 'selected' : null }}>Active</option>
                                     <option value="0" {{ old('status') == "0" ? 'selected' : null }}>Inactive</option>
                                 </select>
